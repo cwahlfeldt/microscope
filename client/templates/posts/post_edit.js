@@ -1,11 +1,11 @@
-Template.postEdit.onCreated({
+Template.postEdit.onCreated(function() {
     Session.set('postEditErrors', {});
 });
 
 Template.postEdit.helpers({
     errorMessage: function(field) {
         return Session.get('postEditErrors')[field];    
-    }
+    },
     errorClass: function(field) {
         return !!Session.get('postEditErrors')[field] ? 'has-error' : '';
     }
@@ -32,7 +32,7 @@ Template.postEdit.events({
         }, function(error) {
             if (error) {
                 // display the error to the user
-                throwError(error.reason);
+                Errors.throw(error.reason);
             } else {
                 Router.go('postPage', {
                     _id: currentPostId

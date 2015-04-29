@@ -29,11 +29,11 @@ Template.postSubmit.events({
         Meteor.call('postInsert', post, function(error, result) {
             // display the error to the user and abort
             if (error) {
-                return throwError(error.reason);
+                return Errors.throw(error.reason);
             }
 
             if (result.postExists) {
-                throwError('Duplicate post');
+                Errors.throw('Duplicate post');
             }
 
             Router.go('postPage', {
